@@ -1,6 +1,8 @@
 import org.apache.commons.lang3.NotImplementedException;
 import treestructure.BookNode;
 
+import java.util.Stack;
+
 /**
  * Application to test traversing Binary Trees and Binary Search Trees.
  *
@@ -12,7 +14,7 @@ public class LibraryService {
      * The root node of our tree of Books.
      * Assume this tree is sorted by ISBN.
      * The tree and its nodes should not be modified by our application.
-    */
+     */
     private final BookNode books;
 
     /**
@@ -31,12 +33,25 @@ public class LibraryService {
      *
      * @param isbn A given ISBN to search our library for
      * @return True if a book with the given ISBN is in our library and
-     *         false otherwise
+     * false otherwise
      */
     public boolean isBookInLibraryByIsbn(String isbn) {
         // PARTICIPANTS: IMPLEMENT YOUR BINARY SEARCH HERE
+        if (isbn == null || isbn.isEmpty()) {
+            return false;
+        }
+        BookNode iter = books;
 
-        throw new NotImplementedException("isBookInLibraryByIsbn is not yet implemented!");
+        while (iter != null) {
+            if (iter.getBook().getIsbn().compareTo(isbn) > 0) {
+                iter = iter.getLeft();
+            } else if (iter.getBook().getIsbn().equals(isbn)) {
+                return true;
+            } else {
+                iter = iter.getRight();
+            }
+        }
+        return false;
     }
 
 
@@ -44,14 +59,45 @@ public class LibraryService {
      * Determines whether or not a book is in the library
      * by searching our tree for a book with the given Title and Author.
      *
-     * @param title A given title to search our library for, alongside an author's name
+     * @param title  A given title to search our library for, alongside an author's name
      * @param author The name of a given author to search our library for, alongside a title
      * @return True if a book with the given title and author is in our library, and
-     *         false otherwise
+     * false otherwise
      */
     public boolean isBookInLibraryByTitleAndAuthor(String title, String author) {
-        // PARTICIPANTS: IMPLEMENT YOUR DEPTH FIRST SEARCH HERE
+        // Check for null or empty title/author
+        if (title == null || title.isEmpty() || author == null || author.isEmpty()) {
+            return false;
+        }
 
-        throw new NotImplementedException("isBookInLibraryByTitleAndAuthor is not yet implemented!");
+        // Create a stack to hold nodes to be searched
+        Stack<BookNode> stack = new Stack<>();
+        stack.push(books); // Assuming 'books' is the root node of the tree
+
+        // While there are nodes in the stack
+        while (!stack.isEmpty()) {
+            // Remove the next node from the stack
+            BookNode currentNode = stack.pop();
+
+            // If the current node is the target, return success
+            if (currentNode != null && isMatch(currentNode, title, author)) {
+                return true;
+            }
+
+            // If the current node is not null, put its child nodes on the stack
+            if (currentNode != null) {
+                // Push right child first so left child is processed next
+                stack.push(currentNode.getRight());
+                stack.push(currentNode.getLeft());
+            }
+        }
+
+        // Stack becomes empty, return failure
+        return false;
     }
+    private boolean isMatch(BookNode bookNode, String title, String author){
+        return bookNode.getBook().getTitle().equals(title)
+                && bookNode.getBook().getAuthor().equals(author);
+    }
+
 }

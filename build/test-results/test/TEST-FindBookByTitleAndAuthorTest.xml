@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="FindBookByTitleAndAuthorTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-08-12T19:17:31" hostname="ENOCK" time="0.082">
+  <properties/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_nonExistingTitle_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.041"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_allBooksExist_returnsTrue()" classname="FindBookByTitleAndAuthorTest" time="0.013"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_emptyTitle_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.005"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_nullAuthor_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.004"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_nullTitle_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.003"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_emptyAuthor_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.004"/>
+  <testcase name="testIsBookInLibraryByTitleAndAuthor_nonExistingAuthor_returnsFalse()" classname="FindBookByTitleAndAuthorTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
